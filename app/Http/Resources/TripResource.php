@@ -3,6 +3,9 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\DayPlansResource;
+use App\Http\Resources\FeaturesResource;
+use App\Http\Resources\AdvantageResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TripResource extends JsonResource
@@ -31,12 +34,11 @@ class TripResource extends JsonResource
                 'updated_at' => $this->updated_at
             ],
 
-            'relationShips' => [
                 'features' => FeaturesResource::collection($this->whenLoaded('features')),
                 'day_plans' => DayPlansResource::collection($this->whenLoaded('day_plans')),
                 'advantages' => AdvantageResource::collection($this->whenLoaded('advantages')),
                 'destination' => new DestinationResource($this->whenLoaded('destination')) // Because its not a collection
-            ]
+            
         ];
     }
 }

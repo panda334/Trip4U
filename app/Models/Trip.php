@@ -59,6 +59,11 @@ class Trip extends Model implements HasMedia
         return $this->belongsToMany(DayPlan::class , 'trip_day_plans');
     }
 
+    public function images()
+{
+    return $this->getMedia('avatars'); // 'images' is the collection name
+}
+
     public function getDurationAttribute()
     {
         $trip = Trip::findOrFail($this->id);

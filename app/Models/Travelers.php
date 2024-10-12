@@ -10,6 +10,7 @@ class Travelers extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['first_name' , 'last_name' , 'age' , 'phone_number'];
 
     public function bookings()
     {
