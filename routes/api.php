@@ -4,9 +4,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\TripController;
+use App\Http\Controllers\API\BillingController;
 use App\Http\Controllers\API\BookingController;
+use App\Http\Controllers\API\ContactController;
 use App\Http\Controllers\API\CountryController;
 use App\Http\Controllers\API\TravelersController;
+use App\Http\Controllers\ContactDetailsController;
 use App\Http\Controllers\API\DestinationController;
 
 Route::get('/user', function (Request $request) {
@@ -32,6 +35,8 @@ Route::get('/countries', [CountryController::class, 'index'])->name('paginateCou
 Route::get('/countriesWithDestination', [CountryController::class, 'countriesWithDestination'])->name('countriesWithDestination');
 
 
+Route::post('addBillingDetails/{booking}' , [BillingController::class , 'addBillingDetail']);
+Route::post('addContactDetails/{booking}' , [ContactController::class , 'addContactDetail']);
 
 
 // Auth Routes

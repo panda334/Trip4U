@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class BookingRequest extends FormRequest
+class ContactRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +22,11 @@ class BookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'adult' => ['required','min:1' , 'numeric'],
-            'children' => 'numeric',
-            'infant' => 'numeric',
-            'start_date' => 'required',
-            'end_date' => 'required',
+            'first_name' => ['required' , 'max:20' , 'min:3'],
+            'last_name' => ['required' , 'max:20' , 'min:3'],
+            'email' => ['email' , 'required'],
+            'phone_number' => ['required' , 'numeric' , 'starts_with:09'  , 'min:10'],
+            'address' => ['nullable' , 'max:100' , 'min:5'],
         ];
     }
 }

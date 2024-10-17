@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Trip;
 use App\Models\User;
 use App\Models\Travelers;
+use App\Models\BillingDetails;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -34,5 +35,15 @@ class Booking extends Model
     public function travelers()
     {
         return $this->belongsToMany(Travelers::class);
+    }
+
+    public function billings()
+    {
+        return $this->hasMany(BillingDetails::class);
+    }
+
+    public function contacts()
+    {
+        return $this->hasMany(ContactDetails::class);
     }
 }

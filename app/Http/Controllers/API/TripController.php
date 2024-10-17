@@ -23,7 +23,7 @@ class TripController extends Controller
      // There is issue with findOrFail
     public function show(Trip $trip)
     {
-     $trip = Trip::find($trip);
+     $trip = Trip::with('day_plans' , 'features' , 'advantages' , 'destination')->find($trip);
      return response()->json([$trip]);
     } 
 
