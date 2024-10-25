@@ -49,6 +49,11 @@ class Trip extends Model implements HasMedia
         return $this->belongsToMany(User::class);
     }
 
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
     public function advantages()
     {
         return $this->belongsToMany(Advantage::class , 'advantage_trips');
