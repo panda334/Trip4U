@@ -22,6 +22,7 @@ use Filament\Support\Facades\FilamentColor;
 use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\TripResource\Pages;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class TripResource extends Resource
 {
@@ -120,8 +121,16 @@ class TripResource extends Resource
                         SpatieMediaLibraryFileUpload::make('avatar')
                             ->collection('avatars')
                             ->multiple()
+                            ->responsiveImages(),
+
+                            SpatieMediaLibraryFileUpload::make('trip_profile')
+                            ->collection('trip_profile')
+                            ->label('Profile Image')
                             ->responsiveImages()
                     ])->columns(2),
+
+
+                    
 
 
                 Section::make('Features')
@@ -175,6 +184,10 @@ class TripResource extends Resource
                         // Convert to float to remove trailing zeros
                         return 'SYR ' .number_format((float) $state, 0, '.' );
                     }),
+
+                    SpatieMediaLibraryImageColumn::make('trip_profile')
+                          ->collection('trip_profile')
+                    ,
 
                 TextColumn::make('children_price')
                     ->toggleable()

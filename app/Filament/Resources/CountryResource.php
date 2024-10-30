@@ -2,18 +2,22 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CountryResource\Pages;
-use App\Filament\Resources\CountryResource\RelationManagers;
-use App\Models\Country;
 use Filament\Forms;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
+use App\Models\Country;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\CountryResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use App\Filament\Resources\CountryResource\RelationManagers;
+
 
 class CountryResource extends Resource
 {
@@ -26,6 +30,10 @@ class CountryResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')->string()->required()->maxLength(3)->maxLength(20)->unique(),
+
+                SpatieMediaLibraryFileUpload::make('country_profile')
+                  ->collection('country_profile')
+                  ->responsiveImages(),
             ]);
     }
 
@@ -36,7 +44,16 @@ class CountryResource extends Resource
                 TextColumn::make('name')
                  ->searchable()
                  ->toggleable()
-                 ->sortable()
+                 ->sortable(),
+
+                 SpatieMediaLibraryImageColumn::make('country_profile')
+                 ->collection('country_profile')
+           ,
+
+
+                 //SpatieMediaLibraryFileUpload::make('avatar')
+                 //->collection('country_profile')
+                 //->responsiveImages(),
             ])
             ->filters([
                 //

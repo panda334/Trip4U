@@ -88,5 +88,8 @@ class Trip extends Model implements HasMedia
     //         }
     //     });
     // }
-
+    public function getImageUrl()
+    {
+        return $this->getFirstMediaUrl('trip_profile');
+    }
 }

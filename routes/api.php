@@ -12,6 +12,7 @@ use App\Http\Controllers\API\TravelersController;
 use App\Http\Controllers\ContactDetailsController;
 use App\Http\Controllers\API\DestinationController;
 use App\Http\Controllers\API\UserController;
+use App\Models\Country;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -25,6 +26,8 @@ Route::get('/trips', [TripController::class, 'index'])->name('paginateTrips');
 Route::get('/trip/{trip}', [TripController::class, 'show'])->name('showOneTrip');
 Route::get('/tripImage/{id}', [TripController::class, 'getImagesForTrip'])->name('showOneTrip');
 Route::get('showTripsForOneCountry/{id}' , [TripController::class , 'showTripsForOneCountry']);
+Route::get('getProfileImageForTrip/{id}' , [TripController::class , 'getProfileImageForTrip']);
+
 
 
 // Destination Routes
@@ -35,6 +38,7 @@ Route::get('/destinations', [DestinationController::class, 'index'])->name('pagi
 // Country Routes
 Route::get('/countries', [CountryController::class, 'index'])->name('paginateCountries');
 Route::get('/countriesWithDestination', [CountryController::class, 'countriesWithDestination'])->name('countriesWithDestination');
+Route::get('/showCountryImage/{id}' , [CountryController::class , 'getCountryImage']);
 
 
 Route::post('addBillingDetails/{booking}', [BillingController::class, 'addBillingDetail']);

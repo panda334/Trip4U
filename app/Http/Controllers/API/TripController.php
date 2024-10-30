@@ -31,7 +31,16 @@ class TripController extends Controller
     $trip = Trip::findOrFail($id)->getMedia('avatars');
     return response()->json($trip);
   }
-
+  public function getProfileImageForTrip($id)
+  {
+    try{
+    $trip = Trip::findOrFail($id)->getMedia('trip_profile');
+    return response()->json($trip);
+    }
+    catch(\Exception $e){
+      return response()->json(['error' => 'No Profile image for this trip.'], 500);
+    }
+  }
 
   public function search(Request $request)
   {
@@ -97,6 +106,10 @@ class TripController extends Controller
     // Filter by trip type
     if ($request->has('type') && !empty($request->type)) {
       $query->where('type', '=', $request->type);
+    }
+
+    if ($request->has('first_date') && !empty($request->first_date)) {
+      $query->where('first_date', '=', $request->first_date);
     }
 
     // Execute the query and get results

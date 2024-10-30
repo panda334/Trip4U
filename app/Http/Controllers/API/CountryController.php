@@ -25,6 +25,13 @@ class CountryController extends Controller
         return CountryResource::collection($countries);
     }
 
+
+    public function getCountryImage($id)
+    {
+      $country = Country::findOrFail($id)->getMedia('country_profile');
+      return response()->json($country);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
