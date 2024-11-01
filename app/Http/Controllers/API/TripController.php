@@ -23,7 +23,7 @@ class TripController extends Controller
   public function show(Trip $trip)
   {
     $trip = Trip::with('day_plans', 'features', 'advantages', 'destination')->find($trip);
-    return response()->json([$trip]);
+    return TripResource::collection($trip);
   }
 
   public function getImagesForTrip($id)
@@ -64,7 +64,7 @@ class TripController extends Controller
     $trips = $query->get();
 
     // Return the results as JSON
-    return response()->json($trips);
+    return TripResource::collection($trips);
   }
 
 
@@ -115,7 +115,7 @@ class TripController extends Controller
     // Execute the query and get results
     $trips = $query->get();
 
-    return response()->json($trips);
+    return TripResource::collection($trips);
   }
 
 

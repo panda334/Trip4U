@@ -13,7 +13,7 @@ class UserController extends Controller
     public function userBookings(Booking $booking)
     {
         $user = Auth::user();
-        $bookings = Booking::with('trip:id,name') // Eager load trips with specific columns
+        $bookings = Booking::with('trip:id,name,type') // Eager load trips with specific columns
         ->where('user_id', $user->id)
         ->get();
 
@@ -21,7 +21,7 @@ class UserController extends Controller
     $bookingsWithTripNames = $bookings->map(function ($booking) {
         return [
             'booking_id' => $booking->id,
-            'trip_name' => $booking->trip->name, // Get the trip name
+            'trip' => $booking->trip,
             'created_at' => $booking->created_at, // Include booking date if needed
         ];
     });

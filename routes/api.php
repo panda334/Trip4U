@@ -41,9 +41,6 @@ Route::get('/countriesWithDestination', [CountryController::class, 'countriesWit
 Route::get('/showCountryImage/{id}' , [CountryController::class , 'getCountryImage']);
 
 
-Route::post('addBillingDetails/{booking}', [BillingController::class, 'addBillingDetail']);
-Route::post('addContactDetails/{booking}', [ContactController::class, 'addContactDetail']);
-
 
 // Search and Filter trips
 Route::get('searchTrips' , [TripController::class , 'search']);
