@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\CountryResource;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\CountryResource;
+use App\Http\Resources\ImageTripResource;
 
 class CountryController extends Controller
 {
@@ -29,7 +30,7 @@ class CountryController extends Controller
     public function getCountryImage($id)
     {
       $country = Country::findOrFail($id)->getMedia('country_profile');
-      return response()->json($country);
+      return ImageTripResource::collection($country);
     }
 
     /**
