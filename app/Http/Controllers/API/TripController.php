@@ -37,7 +37,7 @@ class TripController extends Controller
   {
     try{
     $trip = Trip::findOrFail($id)->getMedia('trip_profile');
-    return TripResource::collection($trips);
+    return TripResource::collection($trip);
     }
     catch(\Exception $e){
       return response()->json(['error' => 'No Profile image for this trip.'], 500);
