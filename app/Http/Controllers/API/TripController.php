@@ -21,10 +21,17 @@ class TripController extends Controller
 
 
   // There is issue with findOrFail
-  public function show(Trip $trip)
+  public function show($tripId)
   {
-    $trip = Trip::with('day_plans', 'features', 'advantages', 'destination')->find($trip);
-    return TripResource::collection($trip);
+
+    $trip = Trip::with('day_plans', 'features', 'advantages', 'destination')->find($tripId);
+
+    // Check if the trip was found
+    if (!$trip) {
+        return response()->json(['message' => 'Trip not found'], 404);
+    }
+
+    return new TripResource($trip); // Use `new` instead of `collection()`
   }
 
   public function getImagesForTrip($id)
