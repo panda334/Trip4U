@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone_number');
             $table->text('address');
-            $table->unsignedBigInteger('booking_id'); // Foreign key
             $table->foreignIdFor(Booking::class)->constrained();
             $table->timestamps();
         });
